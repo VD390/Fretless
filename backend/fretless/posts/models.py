@@ -2,7 +2,7 @@ from django.db import models
 from fretless.settings import FIRST_CHAR_STRING
 
 from users.models import CustomUser
-from validators import validator_color
+from .validators import validator_color
 
 
 class Group(models.Model):

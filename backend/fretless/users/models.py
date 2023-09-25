@@ -27,7 +27,7 @@ class CustomUser(AbstractUser):
                 name="unique_user"
             )
         ]
-        ordering = [-'id']
+        ordering = ['-id']
 
     def __str__(self) -> str:
         return self.username

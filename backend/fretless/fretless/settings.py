@@ -129,3 +129,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 FIRST_CHAR_STRING = 15
+AUTH_USER_MODEL = 'users.CustomUser'
