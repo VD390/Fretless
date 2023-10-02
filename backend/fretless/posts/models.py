@@ -16,7 +16,10 @@ class Group(models.Model):
         unique=True,
         verbose_name="Слаг",
     )
-    description = models.TextField(max_length=200)
+    description = models.TextField(
+        max_length=200,
+        verbose_name="Описание",
+    )
 
     class Meta:
         verbose_name = "Группа"
@@ -78,9 +81,15 @@ class Post(models.Model):
         blank=True,
         null=True,
     )
+    tags = models.ManyToManyField(
+        Tag,
+        verbose_name='Теги'
+    )
 
     class Meta:
         ordering = ['-pub_date']
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
 
     def __str__(self):
         return self.text[:FIRST_CHAR_STRING]
@@ -109,6 +118,8 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-created']
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
 
     def __str__(self):
         return self.text[:FIRST_CHAR_STRING]
@@ -142,7 +153,7 @@ class Favorite(models.Model):
         verbose_name='Пользователь'
     )
     post = models.ForeignKey(
-        CustomUser,
+        Post,
         on_delete=models.ForeignKey,
         related_name='favorite',
         verbose_name='Рецепт'
@@ -154,6 +165,6 @@ class Favorite(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'post'],
-                name='unique_user_posts'
+                name='unique_user_post'
             )
         ]
